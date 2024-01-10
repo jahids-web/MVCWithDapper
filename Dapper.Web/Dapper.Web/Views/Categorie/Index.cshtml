@@ -1,4 +1,5 @@
-﻿<!-- Input with Icons start -->
+﻿@model Dapper.Web.Entities.Categorie
+<!-- Input with Icons start -->
 <section id="input-with-icons">
     <div class="row match-height">
         <div class="col-md-5">
@@ -13,7 +14,7 @@
                             <form method="post">
                                 <h6>Categorie Name</h6>
                                 <div class="form-group">
-                                    <input @* asp-for="Name" type="text" *@ class="form-control" placeholder="Input Categorie ">
+                                    <input asp-for="CategorieName" type="text" class="form-control" placeholder="Input Categorie ">
                                 </div>
 
                                 <div class="col-sm-12">
