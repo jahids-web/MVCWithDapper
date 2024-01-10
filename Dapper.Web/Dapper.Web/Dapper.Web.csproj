@@ -22,9 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Base\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
