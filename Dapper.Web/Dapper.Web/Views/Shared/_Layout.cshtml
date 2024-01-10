@@ -1,49 +1,121 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Dapper.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Dapper.Web.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Dapper.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Dapper.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] Dashboard</title>
+
+    <link rel="stylesheet" href="~/admin/assets/css/main/app.css">
+    <link rel="shortcut icon" href="~/admin/assets/images/logo/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="~/admin/assets/images/logo/favicon.png" type="image/png">
+
+    <link rel="stylesheet" href="~/admin/assets/css/shared/iconly.css">
+    @await RenderSectionAsync("Style", required: false)
+</head>
+
+<body>
+    <div id="app">
+        <div id="main" class="layout-horizontal">
+            <header class="mb-5">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="logo">
+                            <a href="index.html"><img src="~/admin/assets/images/logo/logo.svg" alt="Logo"></a>
+                        </div>
+                        <div class="header-top-right">
+
+                            <div class="dropdown">
+                                <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar avatar-md2">
+                                        <img src="~/admin/assets/images/faces/1.jpg" alt="Avatar">
+                                    </div>
+                                    <div class="text">
+                                        <a class="user-dropdown-name text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                                    <li><a class="dropdown-item" href="#">My Account</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    @* <li><a class="dropdown-item" href="auth-login.html">Logout</a></li> *@
+                                    <form class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                    </form>
+                                </ul>
+                            </div>
+
+                            <!-- Burger button responsive -->
+                            <a href="#" class="burger-btn d-block d-xl-none">
+                                <i class="bi bi-justify fs-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <nav class="main-navbar">
+                    <div class="container">
+                        <ul>
+                            <li class="menu-item">
+                                <a asp-area=" " asp-controller="Dashboard" asp-action="index" class='menu-link'>
+                                    <span>
+                                        <i class="bi bi-grid-fill"></i>
+                                        Dashboard
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a asp-area=" " asp-controller="Categorie" asp-action="index" class='menu-link'>
+                                    <span>Categorie</span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a asp-area=" " asp-controller="AddProduct" asp-action="index" class='menu-link'>
+                                    <span>Add Product</span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a asp-area=" " asp-controller="ShopProductList" asp-action="index" class='menu-link'>
+                                    <span>Shop Product List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </header>
+
+            <div class="content-wrapper container">
+                @RenderBody()
+            </div>
+
+            <footer>
+                <div class="container">
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2021 &copy; Mazer</p>
+                        </div>
+                        <div class="float-end">
+                            <p>
+                                Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="https://saugi.me">Saugi</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    </div>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/admin/assets/js/bootstrap.js"></script>
+    <script src="~/admin/assets/js/app.js"></script>
+    <script src="~/admin/assets/js/pages/horizontal-layout.js"></script>
+
+    <script src="~/admin/assets/extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="~/admin/assets/js/pages/dashboard.js"></script>
+
 </body>
+
 </html>
