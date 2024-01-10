@@ -1,3 +1,7 @@
+using Dapper.Web.Base;
+using Dapper.Web.DbContext;
+using Dapper.Web.Services;
+
 namespace Dapper.Web
 {
     public class Program
@@ -10,6 +14,13 @@ namespace Dapper.Web
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             var app = builder.Build();
+
+            builder.Services.AddControllers();
+            builder.Services.AddTransient<IDapperContext, DapperContext>();
+            builder.Services.AddTransient<ICategorieRepository, CategorieRepository>();
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<ICategorieServices, CategorieServices>();
+            //builder.Services.AddHttpContextAccessor();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
